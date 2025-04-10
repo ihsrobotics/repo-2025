@@ -6,7 +6,7 @@ configs = {}
 
 def load_configs():
     global configs
-    with open("/home/pi/Documents/IME_files/SmallBotHook2025/include/config.json") as f:
+    with open("/home/pi/Documents/IME_files/iceAndBottleBot/include/config.json") as f:
         configs = json.load(f)
 
 load_configs()
