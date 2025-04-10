@@ -1,9 +1,9 @@
 import sys
-sys.path.append("/home/pi/Documents/IME_files/SmallBotHook2025/include")
+sys.path.append("/home/pi/Documents/IME_files/iceAndBottleBot/include")
 from bot_function import *
 
 from ctypes import CDLL
-kipr = "/usr/local/lib/libkipr.so"
+kipr = "/usr/lib/libkipr.so"
 k = CDLL(kipr)
 
 def main():
