@@ -1,0 +1,13 @@
+{
+    "RIGHT_WHEEL": 0,
+    "LEFT_WHEEL": 1,
+    "ARM": 0,
+    "LEFT_T_SENSOR": 3,
+    "RIGHT_T_SENSOR":5,
+    "ET_SENSOR":2,
+    "FORWARD":1,
+    "BACKWARD":-1,
+    "BOOM_STICK":3,
+    "WRIST":1,
+    "CLAW":2
+}
