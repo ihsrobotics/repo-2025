@@ -1,6 +1,6 @@
 from bot_config import *
 from ctypes import CDLL
-kipr = "/usr/local/lib/libkipr.so"
+kipr = "/usr/lib/libkipr.so"
 k = CDLL(kipr)
 
 def drive(left_velocity, right_velocity, duration):
