@@ -1,0 +1,16 @@
+{
+    "FRONT_TOPHAT" : 0,
+    "BACK_TOPHAT" : 1,
+    "ET_SENSOR" : 2,
+    "LEFT_WHEEL" : 0,
+    "RIGHT_WHEEL" : 1,
+    "FORWARD" : 1,
+    "BACKWARD" : -1,
+    "BLACK" : 3000,
+    "SWEEP_ARM" : 0,
+    "CONVEYOR" : 2,
+    "WHEEL" : 3,
+    "ARM_MAX" : 2500,
+    "ARM_MIN" : 0
+    
+}
