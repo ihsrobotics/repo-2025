@@ -79,21 +79,37 @@ def read_color():
     setup_camera()
     k.camera_update()
 
-    red_area = k.get_object_area(2, 0)
-    orange_area = k.get_object_area(0, 0)
-    yellow_area = k.get_object_area(1, 0)
-    print("red:",red_area)
-    print("orange:",orange_area)
-    print("yellow:",yellow_area)
+    #grab largest area from each channel
+    largest_areas = {
+        0: 0,
+        1: 0,
+        2: 0
+    }
+
+    for channel_int in range(0, 3):
+        for obj_int in range(0, k.get_object_count(channel_int)):
+            if k.get_object_area(channel_int, obj_int) > largest_areas[channel_int]:
+                largest_areas[channel_int] = k.get_object_area(channel_int, obj_int)
+
+
+    # red_area = k.get_object_area(2, 0)
+    # orange_area = k.get_object_area(0, 0)
+    # yellow_area = k.get_object_area(1, 0)
+    red_area = largest_areas[2]
+    orange_area = largest_areas[0]
+    yellow_area = largest_areas[1]
+    # print("red:",red_area)
+    # print("orange:",orange_area)
+    # print("yellow:",yellow_area)
     
-    if red_area > orange_area and red_area > yellow_area and red_area > 100000:
-        print("red:",red_area)
+    if red_area > orange_area and red_area > yellow_area and red_area > 80000:
+        # print("red:",red_area)
         return "RED"
-    elif orange_area > red_area and orange_area > yellow_area and orange_area > 100000:
-        print("orange:",orange_area)
+    elif orange_area > red_area and orange_area > yellow_area and orange_area > 80000:
+        # print("orange:",orange_area)
         return "ORANGE"
-    elif yellow_area > red_area and yellow_area > orange_area and yellow_area > 100000:
-        print("yellow:",yellow_area)
+    elif yellow_area > red_area and yellow_area > orange_area and yellow_area > 80000:
+        # print("yellow:",yellow_area)
         return "YELLOW"
     else:
         return "BACKGROUND"
@@ -138,7 +154,7 @@ def on_tape(tophat=FRONT_TOPHAT):
     return k.analog(tophat) > BLACK
 
 def drive(left_speed, right_speed, duration = 0):
-    k.mav(LEFT_WHEEL, left_speed)
+    k.mav(LEFT_WHEEL, left_speed*-1)
     k.mav(RIGHT_WHEEL, right_speed)
     k.msleep(duration)
 
@@ -157,24 +173,43 @@ def line_follow(slow, fast, direction=FORWARD, side="LEFT"):
     if side == "LEFT":
         if on_tape(tophat):
             drive(slow, fast)
+            return True
         if not on_tape(tophat):
             drive(fast, slow)
+            return False
             
     elif side == "RIGHT":
         if on_tape(tophat):
             drive(fast, slow)
+            return True
         if not on_tape(tophat):
             drive(slow, fast)
+            return False
 
-def run_conveyor_and_wheel(speed):
-    k.mav(CONVEYOR, speed)
-    k.mav(WHEEL, speed)
+def run_conveyor_and_wheel():
+    k.mav(CONVEYOR, 1500)
+    k.mav(WHEEL, 1000)
 
-def sweep_arm(speed=1):
-    for i in range(k.get_servo_position(SWEEP_ARM), ARM_MAX, speed):
-        k.set_servo_position(SWEEP_ARM, i)
-        k.msleep(1)
-    
-    for i in range(k.get_servo_position(SWEEP_ARM), ARM_MIN, speed):
-        k.set_servo_position(SWEEP_ARM, i)
-        k.msleep(1)
+def stop_conveyor_and_wheel():
+    k.mav(CONVEYOR, 0)
+    k.mav(WHEEL, 0)
+
+def sweep_arm():
+    k.set_servo_position(SWEEP_ARM, ARM_MAX)
+    k.msleep(250)
+    k.set_servo_position(SWEEP_ARM, ARM_MIN)
+    k.msleep(250)
+
+def eject_pom():
+    k.set_servo_position(EJECTOR, EJECTION_ANGLE)
+    k.msleep(500)
+    k.set_servo_position(EJECTOR, EJECTION_RESTING)
+    print("ejected")
+
+
+def over_tray():
+    if k.analog(TRAY_ET) > 1680:
+        return True
+    else:
+        return False
+        
