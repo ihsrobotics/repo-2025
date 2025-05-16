@@ -1,16 +1,22 @@
 {
-    "FRONT_TOPHAT" : 0,
+    "FRONT_TOPHAT" : 4,
     "BACK_TOPHAT" : 1,
-    "ET_SENSOR" : 2,
+    "TRAY_ET" : 0,
     "LEFT_WHEEL" : 0,
-    "RIGHT_WHEEL" : 1,
+    "RIGHT_WHEEL" : 2,
     "FORWARD" : 1,
     "BACKWARD" : -1,
     "BLACK" : 3000,
-    "SWEEP_ARM" : 0,
-    "CONVEYOR" : 2,
-    "WHEEL" : 3,
-    "ARM_MAX" : 2500,
-    "ARM_MIN" : 0
+    "SWEEP_ARM" : 1,
+    "CONVEYOR" : 3,
+    "WHEEL" : 1,
+    "ARM_MAX" : 1376,
+    "ARM_MIN" : 0,
+    "EJECTOR" : 0,
+    "EJECTION_ANGLE" : 750,
+    "EJECTION_RESTING" : 2047,
+    "READER_ARM" : 1,
+    "READER_ANGLE" : 1745
+
     
 }
